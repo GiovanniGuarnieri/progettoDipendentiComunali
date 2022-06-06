@@ -6,91 +6,94 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import it.epicode.dipendenti.dto.InsertRegionRequestDto;
+import it.epicode.dipendenti.dto.ChangeRegionRequestDTO;
+import it.epicode.dipendenti.dto.InsertRegionRequestDTO;
 import it.epicode.dipendenti.errors.ElementAlreadyPresentException;
+import it.epicode.dipendenti.errors.NotFoundException;
+import it.epicode.dipendenti.model.Regione;
 import it.epicode.dipendenti.repository.RegioneRepository;
+import lombok.extern.slf4j.Slf4j;
 
 
 @Service
+@Slf4j
 public class RegioneService {
 	@Autowired
 	RegioneRepository rr;
 
 	/**
-	 * inserimento di una Regione nel db utilizzando il request mapping POST
+	 * Inserting a Region into the database using the request mapping POST
 	 * @param dto
 	 * @throws ElementAlreadyPresentException
 	 */
 
-	public void inserisciProvincia(InsertRegionRequestDto dto ) throws ElementAlreadyPresentException {
-		log.info("========================siamo nel service inserisci provincia===============");
-		log.info("sigla provincia "+ dto.getSigla());
-		if(!rr.existsById(dto.getSigla())) {
-			log.info("provincia "+ dto.getProvincia());
-			log.info("regione "+ dto.getRegione());
-			Provincia p = new Provincia();
-			BeanUtils.copyProperties(dto, p);
-			pr.save(p);}
+	public void insertRegion(InsertRegionRequestDTO dto ) throws ElementAlreadyPresentException {
+		log.info("========================siamo nel service inserisci regione===============");
+		log.info("Nome Regione "+ dto.getNome());
+		if(!rr.existsById(dto.getNome())) {
+			log.info("Regione "+ dto.getNome());
+			log.info("Regione "+ dto.getNome());
+			Regione r = new Regione();
+			BeanUtils.copyProperties(dto, r);
+			rr.save(r);}
 		else {
-			throw new  ElementAlreadyPresentException("Provincia gia esistente");
+			throw new  ElementAlreadyPresentException("Regione gia esistente");
 		}
 	}
 	/**
-	 * eliminazione di una provincia attraverso la ricerca della sigla utilizzata come chiave primaria nell'entity utilizzando il request mapping DELETE
+	 * Elimination of the region trough the search of the name used as primary key in the entity using the request mapping DELETE
 	 * @param dto
 	 * @throws NotFoundException
 	 */
-	public void eliminaProvincia(EliminaProvinciaRequestDTO dto) throws NotFoundException {
+	public void deleteRegion(String nome ) throws NotFoundException {
 		log.info("========================siamo nel service elimina provincia===============");
-		if(pr.existsById(dto.getSigla())) {
-			log.info("sigla provincia "+ dto.getSigla());
-			Provincia p = pr.findById(dto.getSigla()).get();
-			pr.delete(p);
+		if (rr.existsById(nome)) {
+			log.info("Nome Regione "+ nome);
+			rr.deleteById(nome);
 		}else {
-			throw new NotFoundException("provincia non trovata");
+			throw new NotFoundException("Regione non trovata");
 		}
 	}
 	/**
-	 * ricerca di tutte le province presenti nel db con possibilita di paginazione
+	 * Search of all the regions in the database with the possibility of paging
 	 * @param page
 	 * @return
 	 */
-	public Page cercaProvincia(Pageable page) {
-		log.info("========================siamo nel service cerca provincee===============");
-		return pr.findAll(page);
+	public Page searchRegione(Pageable page) {
+		log.info("========================siamo nel service cerca Regione===============");
+		return rr.findAll(page);
 
 	}
 	/**
-	 * modifica di una provincia presente nel db attraverso request mapping PUT
+	 * Modification of a region present in the database through PUT request mapping
 	 * @param dto
 	 * @throws NotFoundException
 	 */
-	public void modificaProvincia(ModificaProvinciaRequestDTO dto) throws NotFoundException {
-		log.info("========================siamo nel service modifica provincia===============");
-		log.info(" " + dto.getSigla());
-		if(pr.existsById(dto.getSigla())) {
-			log.info("provincia "+ dto.getProvincia());
-			log.info("regione "+ dto.getRegione());
-			Provincia p = pr.findById(dto.getSigla()).get();
-			BeanUtils.copyProperties(dto, p);
-			pr.save(p);
+	public void ChangeRegion(ChangeRegionRequestDTO dto) throws NotFoundException {
+		log.info("========================siamo nel service modifica Regione===============");
+		log.info(" " + dto.getNome());
+		if(rr.existsById(dto.getNome())) {
+			log.info("regione "+ dto.getNome());
+			Regione r = rr.findById(dto.getNome()).get();
+			BeanUtils.copyProperties(dto, r);
+			rr.save(r);
 
 		}else{
-			throw new  NotFoundException("provincia non trovata");
+			throw new  NotFoundException("regione non trovata");
 		}
 
 
 	}
 	/**
-	 * ricerca della provincia attraverso il nome della provincia con possibilita di paginazione utilizzando il request mapping GET
+	 * Search of the Region through the of the region with the possibility of paging using the GET request mapping
 	 * @param page
 	 * @param provincia
 	 * @return
 	 */
-	public Page cercaProvinciaNome(Pageable page,String provincia) {
-		log.info("========================siamo nel service cerca  provincia nome===============");
-		log.info(" nome provincia " + provincia);
-		return pr.findByProvinciaContaining(page,provincia);
+	public Page cercaRegioneNome(Pageable page,String nome) {
+		log.info("========================siamo nel service cerca  Regione nome===============");
+		log.info(" nome Regione " + nome);
+		return rr.findByRegioneContaining(page,nome);
 	}
 
 	
