@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import lombok.extern.slf4j.Slf4j;
 
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
@@ -54,20 +55,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		log.trace("configure(HttpSecurity http)");
 		http.cors()
-		.and()
-		.csrf()
-		.disable()
-		.exceptionHandling()
-		.authenticationEntryPoint(unauthorizedHandler)
-		.and()
-		.sessionManagement()
-		.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		.and()
-		.authorizeRequests()
-		.antMatchers("/**")
-		.permitAll()
-		.anyRequest()
-		.authenticated();
+			.and()
+			.csrf()
+			.disable()
+			.exceptionHandling()
+			.authenticationEntryPoint(unauthorizedHandler)
+			.and()
+			.sessionManagement()
+			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.and()
+			.authorizeRequests()
+			.antMatchers("/**")
+			.permitAll()
+			.anyRequest()
+			.authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
