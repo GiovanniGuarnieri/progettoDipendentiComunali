@@ -2,7 +2,10 @@ package it.epicode.dipendenti.services;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 import it.epicode.dipendenti.dto.InsertComuneRequestDTO;
 import it.epicode.dipendenti.dto.UpdateComuneRequestDTO;
@@ -40,6 +43,7 @@ public class ComuneService {
 
 	}
 
+	
 	public void updateComune(UpdateComuneRequestDTO dto) throws NotFoundException {
 		if(comuneRepo.existsById(dto.getIdComune())) {
 			Comune comune = comuneRepo.findById(dto.getIdComune()).get();
@@ -60,6 +64,41 @@ public class ComuneService {
 			throw new NotFoundException("Comune non trovato");
 		}
 
+	}
+	
+	public void deleteComune(Long idComune) throws NotFoundException {
+		if(comuneRepo.existsById(idComune)) {
+			Comune comune = comuneRepo.findById(idComune).get();
+			comuneRepo.delete(comune);
+		}
+		else {
+			throw new NotFoundException("comune non trovato");
+		}
+	}
+	
+	public Comune findComuneById(Long idComune) throws NotFoundException {
+		if(comuneRepo.existsById(idComune)) {
+			Comune comune = comuneRepo.findById(idComune).get();
+			return comune;
+		}
+		else {
+			throw new NotFoundException("comune non trovato");
+		}
+		
+	}
+	
+	public Page findByNumeroDipendentiBetween(int numeroMin, int numeroMax, Pageable page) {
+		return comuneRepo.findComuneByNumeroDipendentiBetween(numeroMin, numeroMax, page);
+		
+	}
+	
+	public Page findByNumeroDipendenti(int numeroDipendenti, Pageable page) {
+		return comuneRepo.findByNumeroDipendenti(numeroDipendenti, page);
+	}
+	
+	
+	public Page findAllComuni(Pageable page) {
+		return comuneRepo.findAll(page);
 	}
 
 
