@@ -14,32 +14,32 @@ import it.epicode.dipendenti.repository.RegioneRepository;
 
 @Service
 public class ComuneService {
-	
-	
+
+
 	@Autowired
 	ComuneRepository comuneRepo;
-	
+
 	@Autowired
 	RegioneRepository regioneRepo;
-	
-	
-	
-	
+
+
+
+
 	public void insertComune(InsertComuneRequestDTO dto) throws NotFoundException {
 		Comune comune = new Comune();
 		BeanUtils.copyProperties(dto, comune);
 		if(regioneRepo.existsById(dto.getNomeRegione())) {
-		 Regione regione = regioneRepo.findById(dto.getNomeRegione()).get();
-		 comune.setRegione(regione);
-		 regione.getComuni().add(comune);
-		 comuneRepo.save(comune);
+			Regione regione = regioneRepo.findById(dto.getNomeRegione()).get();
+			comune.setRegione(regione);
+			regione.getComuni().add(comune);
+			comuneRepo.save(comune);
 		}
 		else {
 			throw new NotFoundException("regione non trovata");
 		}
-		
+
 	}
-	
+
 	public void updateComune(UpdateComuneRequestDTO dto) throws NotFoundException {
 		if(comuneRepo.existsById(dto.getIdComune())) {
 			Comune comune = comuneRepo.findById(dto.getIdComune()).get();
@@ -49,19 +49,19 @@ public class ComuneService {
 				comune.setRegione(regione);
 				regione.getComuni().add(comune);
 				comuneRepo.save(comune);
-				
-				}
+
+			}
 			else {
 				throw new NotFoundException("Regione non trovata");
 			}
-			
+
 		}
 		else {
 			throw new NotFoundException("Comune non trovato");
 		}
 
 	}
-	
-	
+
+
 
 }
