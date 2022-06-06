@@ -41,7 +41,7 @@ public class RegioneService {
 		}
 	}
 	/**
-	 * Elimination of the region trough the search of the name used as primary key in the entity using the request mapping DELETE
+	 * Eliminating a region trough the search of the name used as primary key in the entity using the request mapping DELETE
 	 * @param dto
 	 * @throws NotFoundException
 	 */
