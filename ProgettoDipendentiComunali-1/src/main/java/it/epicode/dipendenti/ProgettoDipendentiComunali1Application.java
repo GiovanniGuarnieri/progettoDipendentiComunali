@@ -1,4 +1,4 @@
-package it.epicode.Dipendenti;
+package it.epicode.dipendenti;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
