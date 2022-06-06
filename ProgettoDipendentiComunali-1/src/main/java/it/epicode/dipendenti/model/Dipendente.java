@@ -21,7 +21,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name="Dipendenti")
 public class Dipendente {
 
 	@Id
@@ -36,5 +35,5 @@ public class Dipendente {
 	
 	@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
 	@JoinColumn(name = "id_comuni")
-	private Comune comuni;
+	private Comune comune;
 }

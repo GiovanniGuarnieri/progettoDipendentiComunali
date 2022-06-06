@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class Comune {
-	//OK
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Setter(value = AccessLevel.NONE)
@@ -33,7 +34,7 @@ public class Comune {
 	private String nome;
 	private int numeroDipendenti;
 	
-	@OneToMany(mappedBy = "comune", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+	@OneToMany(mappedBy = "comune", cascade = CascadeType.ALL)
 	private List<Dipendente> dipendenti = new ArrayList<>();
 	@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
 	@JoinColumn(name = "id_regione")
