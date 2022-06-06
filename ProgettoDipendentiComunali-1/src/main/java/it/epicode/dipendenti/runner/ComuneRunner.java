@@ -22,7 +22,9 @@ import it.epicode.dipendenti.repository.ComuneRepository;
 import it.epicode.dipendenti.repository.DipendenteRepository;
 import it.epicode.dipendenti.repository.RegioneRepository;
 import lombok.extern.slf4j.Slf4j;
-
+/**
+ * Classe runner
+ */
 @Component
 @Slf4j
 public class ComuneRunner implements CommandLineRunner {
