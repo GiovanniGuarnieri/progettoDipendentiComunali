@@ -55,7 +55,7 @@ public class RegioneService {
 		}
 	}
 	/**
-	 * Search of all the regions in the database with the possibility of paging
+	 * Searching all the regions in the database with the possibility of paging
 	 * @param page
 	 * @return
 	 */
@@ -65,7 +65,7 @@ public class RegioneService {
 
 	}
 	/**
-	 * Modification of a region present in the database through PUT request mapping
+	 * Modifying a region present in the database through PUT request mapping
 	 * @param dto
 	 * @throws NotFoundException
 	 */
@@ -85,7 +85,7 @@ public class RegioneService {
 
 	}
 	/**
-	 * Search of the Region through the of the region with the possibility of paging using the GET request mapping
+	 * Searching a Region through the name of the region with the possibility of paging using the GET request mapping
 	 * @param page
 	 * @param provincia
 	 * @return
