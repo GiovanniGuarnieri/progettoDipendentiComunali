@@ -90,7 +90,7 @@ public class RegioneService {
 	 * @param provincia
 	 * @return
 	 */
-	public Page cercaRegioneNome(Pageable page,String nome) {
+	public Page searchRegionByName(Pageable page,String nome) {
 		log.info("========================siamo nel service cerca  Regione nome===============");
 		log.info(" nome Regione " + nome);
 		return rr.findByRegioneContaining(page,nome);
