@@ -9,5 +9,5 @@ import it.epicode.dipendenti.model.Regione;
 public interface RegioneRepository extends PagingAndSortingRepository<Regione, String> {
 
 	
-	Page<Regione> findByRegioneContaining(Pageable page,String Regione);
+	Page<Regione> findByNomeContaining(String Regione,Pageable page);
 }
