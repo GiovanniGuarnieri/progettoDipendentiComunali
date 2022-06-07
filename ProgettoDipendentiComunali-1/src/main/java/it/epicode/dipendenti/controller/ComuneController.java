@@ -80,4 +80,43 @@ public class ComuneController {
 		return ResponseEntity.ok(comuneService.findAllComuni(page));
 	}
 	
+	
+	@SuppressWarnings("rawtypes")
+	@Operation (summary = "Ritorna tutti i comuni  associati al range dei dipendenti inserito a parametro")
+	@ApiResponse(responseCode = "200" , description = "lista Comuni")
+	@ApiResponse(responseCode ="500" , description = "Error Internal Server")
+	@PreAuthorize("isAuthenticated()")
+	@SecurityRequirement(name = "bearerAuth")
+	@GetMapping ("/tuttidipendidelcomunerange/{numeroMin}/{numeroMax}")
+	public ResponseEntity getAllComuniNumeroDipendentiBetween(@PathVariable("numeroMin")int numeroMin, @PathVariable("numeroMax") int numeroMax, Pageable page) {
+		return ResponseEntity.ok(comuneService.findByNumeroDipendentiBetween(numeroMin, numeroMax, page));
+	}
+	
+	
+	
+	@SuppressWarnings("rawtypes")
+	@Operation (summary = "Ritorna il comune con i dipendenti associati al numero inserito a parametro")
+	@ApiResponse(responseCode = "200" , description = "lista Comuni")
+	@ApiResponse(responseCode ="500" , description = "Error Internal Server")
+	@PreAuthorize("isAuthenticated()")
+	@SecurityRequirement(name = "bearerAuth")
+	@GetMapping ("/tuttidipendidelcomune/{numeroDipendenti}")
+	public ResponseEntity getAllComuniNumeroDipendenti(@PathVariable("numeroDipendenti") int numeroDipendenti, Pageable page) {
+		return ResponseEntity.ok(comuneService.findByNumeroDipendenti(numeroDipendenti, page));
+	}
+	
+	
+	
+	@SuppressWarnings("rawtypes")
+	@Operation (summary = "Ritorna tutti il comune associato all'ID che viene messo a parametro presenti nel db")
+	@ApiResponse(responseCode = "200" , description = "Comune Trovato")
+	@ApiResponse(responseCode ="404" , description = "Element not Found")
+	@PreAuthorize("isAuthenticated()")
+	@SecurityRequirement(name = "bearerAuth")
+	@GetMapping ("/comunebyid/{idComune}")
+	public ResponseEntity getComuneByID( @PathVariable("idComune")Long idComune) throws NotFoundException {
+		return ResponseEntity.ok(comuneService.findComuneById(idComune));
+	}
+	
+	
 }
