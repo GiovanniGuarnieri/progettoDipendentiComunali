@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,7 +27,7 @@ public class Regione {
 	@Id
 	private String nome;
 	private BigDecimal numeroAbitanti;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "regione", cascade = CascadeType.ALL)
 	private List<Comune> comuni = new ArrayList<>();
 	

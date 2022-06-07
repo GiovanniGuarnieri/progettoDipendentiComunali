@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,7 +35,7 @@ public class Comune {
 	private Long id;
 	private String nome;
 	private int numeroDipendenti;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "comune", cascade = CascadeType.ALL)
 	private List<Dipendente> dipendenti = new ArrayList<>();
 	@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
