@@ -2,9 +2,11 @@ package it.epicode.dipendenti.services;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import it.epicode.dipendenti.dto.GetAllDipendentiResponseDTO;
+
 import it.epicode.dipendenti.dto.InsertDipendenteRequestDTO;
 import it.epicode.dipendenti.dto.UpdateDipendenteRequestDTO;
 import it.epicode.dipendenti.errors.NotFoundException;
@@ -70,6 +72,11 @@ public class DipendenteService {
 		}
 	}
 	
+
+	
+	public Page findByDipendenteRegione(String regione, Pageable page) {
+		return dipendenteRepo.findByDipendenteNomeRegione(regione, page);
+	}
 
 
 }
