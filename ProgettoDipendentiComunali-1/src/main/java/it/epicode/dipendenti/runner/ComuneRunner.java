@@ -66,11 +66,13 @@ public class ComuneRunner implements CommandLineRunner {
 		
 		log.info("============================================ CREAZIONE DELLA REGIONE CAMPANIA, COMUNE SALERNO E DIPENDENTE GIAMPAOLO");
 		
-		
-		Comune Napoli = Comune.builder().nome("Salerno").numeroDipendenti(50).regione(Campania).build();
+		Regione Campania2 = Regione.builder().nome("Campaniaa").numeroAbitanti(BigDecimal.valueOf(200556000)).build();
+		Comune Napoli = Comune.builder().nome("Napoli").numeroDipendenti(50).regione(Campania2).build();
 		Dipendente Giovanni = Dipendente.builder().nome("Giovanni").cognome("Guarnieri").numeroTelefonico("3497455642").codiceFiscale("GMPSBA505A13D487T")
-							.ruoloDipendente(ETipoDipendente.AMMINISTRATIVO).comune(Salerno).build();
+							.ruoloDipendente(ETipoDipendente.AMMINISTRATIVO).comune(Napoli).build();
 		
+		//francesco provalo la prossima volta prima di inviarlo!!
+			
 		dipendenteRepository.save(Giovanni);
 		
 		log.info("============================================ CREAZIONE DELLA REGIONE CAMPANIA, COMUNE NAPOLI E DIPENDENTE GIOVANNI");
