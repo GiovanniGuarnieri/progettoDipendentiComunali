@@ -6,11 +6,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import it.epicode.dipendenti.model.Dipendente;
+import it.epicode.dipendenti.model.ETipoDipendente;
 
 public interface DipendenteRepository extends PagingAndSortingRepository <Dipendente , Long> {
 
 	@Query("select dp from Dipendente dp join dp.comune c join c.regione r where r.nome = ?1 ")
 	Page<Dipendente> findByDipendenteNomeRegione(String regione,Pageable page);
+	
+	Page<Dipendente> findByRuoloDipendente(ETipoDipendente ruoloDipendente,Pageable page);
 
 	
 }

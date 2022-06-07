@@ -12,12 +12,14 @@ import it.epicode.dipendenti.dto.UpdateDipendenteRequestDTO;
 import it.epicode.dipendenti.errors.NotFoundException;
 import it.epicode.dipendenti.model.Comune;
 import it.epicode.dipendenti.model.Dipendente;
-import it.epicode.dipendenti.model.Regione;
+import it.epicode.dipendenti.model.ETipoDipendente;
 import it.epicode.dipendenti.repository.ComuneRepository;
 import it.epicode.dipendenti.repository.DipendenteRepository;
-import it.epicode.dipendenti.repository.RegioneRepository;
+import lombok.extern.slf4j.Slf4j;
+
 
 @Service
+@Slf4j
 public class DipendenteService {
 	@Autowired
 	DipendenteRepository dipendenteRepo;
@@ -71,9 +73,18 @@ public class DipendenteService {
 			throw new NotFoundException("dipendente non trovato");
 		}
 	}
-	
 
-	
+	public Page findAll(Pageable page) {
+		return dipendenteRepo.findAll(page);
+	}
+
+	public Page findByRuoloDipendente(ETipoDipendente ruoloDipendente, Pageable page) {
+		log.info("========="+ ruoloDipendente.toString());
+		return dipendenteRepo.findByRuoloDipendente(ruoloDipendente, page);
+	}
+
+
+
 	public Page findByDipendenteRegione(String regione, Pageable page) {
 		return dipendenteRepo.findByDipendenteNomeRegione(regione, page);
 	}
