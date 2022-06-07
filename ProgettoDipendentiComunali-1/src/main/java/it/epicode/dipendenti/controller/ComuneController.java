@@ -64,7 +64,7 @@ public class ComuneController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@SecurityRequirement(name = "bearerAuth")
 	@DeleteMapping("/eliminacomune/{idComune}")
-	public ResponseEntity deleteComune( @PathVariable("idComune")Long idComune, Pageable page) throws NotFoundException {
+	public ResponseEntity deleteComune( @PathVariable("idComune")Long idComune) throws NotFoundException {
 		comuneService.deleteComune(idComune);
 		return ResponseEntity.ok("COMUNE ELIMINATO");
 	}

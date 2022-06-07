@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class RegioneService {
+	
 	@Autowired
 	RegioneRepository rr;
 
@@ -59,7 +60,7 @@ public class RegioneService {
 	 * @param page
 	 * @return
 	 */
-	public Page searchRegione(Pageable page) {
+	public Page searchAllRegioni(Pageable page) {
 		log.info("========================siamo nel service cerca Regione===============");
 		return rr.findAll(page);
 
