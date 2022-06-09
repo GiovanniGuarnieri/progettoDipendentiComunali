@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import it.epicode.dipendenti.dto.ChangeRegionRequestDTO;
+import it.epicode.dipendenti.dto.UpdateRegionRequestDTO;
 import it.epicode.dipendenti.dto.InsertComuneRequestDTO;
 import it.epicode.dipendenti.dto.InsertRegionRequestDTO;
 import it.epicode.dipendenti.dto.UpdateComuneRequestDTO;
@@ -55,7 +55,7 @@ public class RegioneController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@SecurityRequirement(name = "bearerAuth")
 	@PutMapping("/modificaregione")
-	public ResponseEntity updateRegione(@Valid @RequestBody ChangeRegionRequestDTO dto) throws NotFoundException {
+	public ResponseEntity updateRegione(@Valid @RequestBody UpdateRegionRequestDTO dto) throws NotFoundException {
 		regioneService.ChangeRegion(dto);
 		return ResponseEntity.ok("REGIONE MODIFICATO");
 	}

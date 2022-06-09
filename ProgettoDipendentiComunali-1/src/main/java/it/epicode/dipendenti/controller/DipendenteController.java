@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import it.epicode.dipendenti.dto.ChangeRegionRequestDTO;
+import it.epicode.dipendenti.dto.UpdateRegionRequestDTO;
 import it.epicode.dipendenti.dto.InsertDipendenteRequestDTO;
 import it.epicode.dipendenti.dto.InsertRegionRequestDTO;
 import it.epicode.dipendenti.dto.UpdateDipendenteRequestDTO;

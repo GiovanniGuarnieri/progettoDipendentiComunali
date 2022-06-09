@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import it.epicode.dipendenti.dto.ChangeRegionRequestDTO;
+import it.epicode.dipendenti.dto.UpdateRegionRequestDTO;
 import it.epicode.dipendenti.dto.InsertRegionRequestDTO;
 import it.epicode.dipendenti.errors.ElementAlreadyPresentException;
 import it.epicode.dipendenti.errors.NotFoundException;
@@ -70,7 +70,7 @@ public class RegioneService {
 	 * @param dto
 	 * @throws NotFoundException
 	 */
-	public void ChangeRegion(ChangeRegionRequestDTO dto) throws NotFoundException {
+	public void ChangeRegion(UpdateRegionRequestDTO dto) throws NotFoundException {
 		log.info("========================siamo nel service modifica Regione===============");
 		log.info(" " + dto.getNome());
 		if(rr.existsById(dto.getNome())) {
